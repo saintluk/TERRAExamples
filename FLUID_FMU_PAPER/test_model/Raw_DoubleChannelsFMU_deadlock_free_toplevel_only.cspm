@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ASCII"?>
+<csp:CSPDiagram file-version="3" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cpc="http:///nl/utwente/ce/terra/cpc/model/cpc.ecore" xmlns:csp="http:///nl/utwente/ce/terra/csp/model/csp.ecore" xmlns:fmi="http:///nl/utwente/ce/terra/fmi/model/fmi.ecore">
+  <objects xsi:type="csp:CSPWriter" name="Writer_A" constraints="315,210,40,40" compositionalRelations="//@compositionalRelations.0" guardExpression="MasterTime >= currentTime + step_size" link="//@links.1" variable="//@properties.1/@variables.1"/>
+  <objects xsi:type="csp:CSPReader" name="Reader_A" constraints="315,103,40,40" compositionalRelations="//@compositionalRelations.0" link="//@links.0" variable="//@properties.1/@variables.0"/>
+  <objects xsi:type="csp:CSPReader" name="Reader_B" constraints="521,210,40,40" compositionalRelations="//@compositionalRelations.2" link="//@links.1" variable="//@properties.1/@variables.2"/>
+  <objects xsi:type="csp:CSPWriter" name="Writer_B" constraints="521,103,40,40" compositionalRelations="//@compositionalRelations.2" guardExpression="MasterTime >= currentTime + step_size" link="//@links.0" variable="//@properties.1/@variables.3"/>
+  <objects xsi:type="csp:CSPModel" name="FMI_FMU_A" constraints="122,146,106,61" compositionalRelations="//@compositionalRelations.1" guardExpression="init == 1">
+    <submodel xsi:type="csp:CSPDiagram"/>
+    <configuration xsi:type="fmi:FMIModel">
+      <headerFiles>fmi2Functions.h</headerFiles>
+      <headerFiles>logger.h</headerFiles>
+      <sourceFiles>src/logger.cpp</sourceFiles>
+      <portMapping name="in" dataType="REAL" reference="14"/>
+      <portMapping name="out" direction="OUTPUT" dataType="REAL" reference="15"/>
+      <parameterRealMapping name="Constant2_C" value="1.5"/>
+      <parameterRealMapping name="Kp1_K" reference="1" value="10.0"/>
+      <parameterRealMapping name="limit1_maximum" reference="2" value="0.5"/>
+      <parameterRealMapping name="limit1_minimum" reference="3"/>
+      <parameterRealMapping name="reference1_amplitude" reference="4"/>
+      <parameterRealMapping name="reference1_start_time" reference="5" value="1.5"/>
+      <modelDescription modelName="LevelController" guid="{d6f9df54-1689-46cc-b366-77379034dd53}" generationTool="20-sim"/>
+      <simulationProperties stopTime="20.0" stepSize="0.001"/>
+      <FMUProperties modelIdentifier="LevelController" canHandleVariableCommunicationStepSize="true" canNotUseMemoryManagementFunctions="true"/>
+    </configuration>
+  </objects>
+  <objects xsi:type="csp:CSPModel" name="FMI_FMU_B" constraints="645,146,110,62" compositionalRelations="//@compositionalRelations.3" guardExpression="init == 1">
+    <submodel xsi:type="csp:CSPDiagram"/>
+    <configuration xsi:type="fmi:FMIModel">
+      <headerFiles>fmi2Functions.h</headerFiles>
+      <headerFiles>logger.h</headerFiles>
+      <sourceFiles>src/logger.cpp</sourceFiles>
+      <portMapping name="in" dataType="REAL" reference="14"/>
+      <portMapping name="out" direction="OUTPUT" dataType="REAL" reference="15"/>
+      <parameterRealMapping name="Constant2_C" value="1.5"/>
+      <parameterRealMapping name="Kp1_K" reference="1" value="10.0"/>
+      <parameterRealMapping name="limit1_maximum" reference="2" value="0.5"/>
+      <parameterRealMapping name="limit1_minimum" reference="3"/>
+      <parameterRealMapping name="reference1_amplitude" reference="4"/>
+      <parameterRealMapping name="reference1_start_time" reference="5" value="1.5"/>
+      <modelDescription modelName="LevelController" guid="{d6f9df54-1689-46cc-b366-77379034dd53}" generationTool="20-sim"/>
+      <simulationProperties stopTime="20.0" stepSize="0.001"/>
+      <FMUProperties modelIdentifier="LevelController" canHandleVariableCommunicationStepSize="true" canNotUseMemoryManagementFunctions="true"/>
+    </configuration>
+  </objects>
+  <objects xsi:type="csp:CSPCompositionalGroup" name="PARALLEL_A" constraints="290,78,90,197" compositionalRelations="//@compositionalRelations.1" relations="//@compositionalRelations.0"/>
+  <objects xsi:type="csp:CSPCompositionalGroup" name="PARALLEL_B" constraints="495,78,91,197" compositionalRelations="//@compositionalRelations.3" relations="//@compositionalRelations.2"/>
+  <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL_B" constraints="470,53,310,247" compositionalRelations="//@compositionalRelations.4" relations="//@compositionalRelations.3"/>
+  <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL_A" constraints="97,53,308,247" compositionalRelations="//@compositionalRelations.4" relations="//@compositionalRelations.1"/>
+  <objects xsi:type="csp:CSPCompositionalGroup" name="PARALLEL" constraints="72,28,733,297" relations="//@compositionalRelations.4">
+    <properties xsi:type="csp:CSPRecursionProperty"/>
+  </objects>
+  <properties xsi:type="cpc:CPCUnitsProperty">
+    <units name="data" type="real" unit=""/>
+    <units name="IO_Real" type="real" unit="fmi_Real"/>
+  </properties>
+  <properties xsi:type="csp:CSPVariablesProperty">
+    <variables name="in_A" type="//@properties.0/@units.0"/>
+    <variables name="out_A" type="//@properties.0/@units.0"/>
+    <variables name="in_B" type="//@properties.0/@units.0"/>
+    <variables name="out_B" type="//@properties.0/@units.0"/>
+  </properties>
+  <links xsi:type="csp:CSPChannel" ports="//@objects.1 //@objects.3"/>
+  <links xsi:type="csp:CSPChannel" ports="//@objects.2 //@objects.0"/>
+  <compositionalRelations compositeObjects="//@objects.1 //@objects.0" compositionalGroup="//@objects.6"/>
+  <compositionalRelations compositeObjects="//@objects.4 //@objects.6" type="SEQUENTIAL" compositionalGroup="//@objects.9"/>
+  <compositionalRelations compositeObjects="//@objects.3 //@objects.2" compositionalGroup="//@objects.7"/>
+  <compositionalRelations compositeObjects="//@objects.5 //@objects.7" type="SEQUENTIAL" compositionalGroup="//@objects.8"/>
+  <compositionalRelations compositeObjects="//@objects.9 //@objects.8" compositionalGroup="//@objects.10"/>
+</csp:CSPDiagram>

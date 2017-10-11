@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arch:ArchitectureDiagram file-version="0" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arch="http:///nl/utwente/ce/terra/arch/model/architecture.ecore" xmlns:cpc="http:///nl/utwente/ce/terra/cpc/model/cpc.ecore">
+  <objects xsi:type="arch:ArchExternalModel" name="LevelController" constraints="82,74,137,82" externalSubmodel="/FLUID_FMU_PAPER/LevelController/model/LevelController.cspm">
+    <objects xsi:type="arch:ArchPort" link="//@links.1" unitType="//@properties.0/@units.0" name="in" constraints="127,52,10,10"/>
+    <objects xsi:type="arch:ArchPort" direction="OUTGOING" link="//@links.0" unitType="//@properties.0/@units.0" name="out" constraints="127,15,10,10"/>
+  </objects>
+  <objects xsi:type="arch:ArchExternalModel" name="plant" constraints="332,74,59,82" externalSubmodel="/FLUID_FMU_PAPER/plant/model/plant.cspm">
+    <objects xsi:type="arch:ArchPort" link="//@links.0" name="control" constraints="0,15,10,10"/>
+    <objects xsi:type="arch:ArchPort" direction="OUTGOING" link="//@links.1" name="height" constraints="0,52,10,10"/>
+  </objects>
+  <properties xsi:type="cpc:CPCUnitsProperty">
+    <units name="IO_Real" type="real" unit="fmi_Real"/>
+  </properties>
+  <links xsi:type="arch:ArchLink" ports="//@objects.0/@objects.1 //@objects.1/@objects.0"/>
+  <links xsi:type="arch:ArchLink" ports="//@objects.1/@objects.1 //@objects.0/@objects.0"/>
+</arch:ArchitectureDiagram>

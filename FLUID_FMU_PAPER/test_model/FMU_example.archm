@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arch:ArchitectureDiagram file-version="0" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arch="http:///nl/utwente/ce/terra/arch/model/architecture.ecore" xmlns:cpc="http:///nl/utwente/ce/terra/cpc/model/cpc.ecore">
+  <objects xsi:type="arch:ArchExternalModel" name="FMU_A" constraints="134,112,93,53" externalSubmodel="/FLUID_FMU_PAPER/test_model/FMU_A.cspm">
+    <objects xsi:type="arch:ArchPort" direction="OUTGOING" link="//@links.0" unitType="//@properties.0/@units.0" name="out" constraints="83,22,10,10"/>
+  </objects>
+  <objects xsi:type="arch:ArchExternalModel" name="FMU_B" constraints="293,113,91,52" externalSubmodel="/FLUID_FMU_PAPER/test_model/FMU_B.cspm">
+    <objects xsi:type="arch:ArchPort" link="//@links.0" name="control" constraints="0,21,10,10"/>
+  </objects>
+  <properties xsi:type="cpc:CPCUnitsProperty">
+    <units name="IO_Real" type="real" unit="fmi_Real"/>
+  </properties>
+  <links xsi:type="arch:ArchLink" ports="//@objects.0/@objects.0 //@objects.1/@objects.0"/>
+</arch:ArchitectureDiagram>

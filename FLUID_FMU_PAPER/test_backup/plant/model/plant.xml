@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fmiModelDescription fmiVersion="2.0" modelName="plant" guid="{cd2add09-a420-4273-ada0-27cd3a18ec88}" generationTool="20-sim" numberOfEventIndicators="0" copyright="Controllab Products B.V." license="-">
+<CoSimulation modelIdentifier="plant" needsExecutionTool="false" canHandleVariableCommunicationStepSize="true" canInterpolateInputs="false" maxOutputDerivativeOrder="0" canRunAsynchronuously="false" canBeInstantiatedOnlyOncePerProcess="false" canNotUseMemoryManagementFunctions="true" canGetAndSetFMUstate="false" canSerializeFMUstate="false" providesDirectionalDerivative="false">
+<SourceFiles>
+<File name="EulerAngles.c" />
+<File name="fmi2Functions.c" />
+<File name="MotionProfiles.c" />
+<File name="xxfuncs.c" />
+<File name="xxinteg.c" />
+<File name="xxinverse.c" />
+<File name="xxmatrix.c" />
+<File name="xxmodel.c" />
+<File name="xxsubmod.c" />
+<File name="xxTable2D.c" />
+</SourceFiles>
+</CoSimulation>
+<DefaultExperiment startTime="0.0" stopTime="20.0" stepSize="0.001" />
+<ModelVariables>
+<ScalarVariable name="FlowSensor1.p1.p" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="FlowSensor1.p1.phi" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="FlowSensor1.p2.e" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="FlowSensor1.p2.f" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="FlowSensor1.flow" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.p.e" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.output" valueReference="14" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.height" valueReference="14" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.area" valueReference="0" variability="tunable" causality="parameter">
+<Real start="1.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.gravity" valueReference="1" variability="tunable" causality="parameter">
+<Real start="9.81" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.liquid_density" valueReference="2" variability="tunable" causality="parameter">
+<Real start="1.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.p.e" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.output" valueReference="16" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.height" valueReference="16" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.area" valueReference="3" variability="tunable" causality="parameter">
+<Real start="1.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.gravity" valueReference="4" variability="tunable" causality="parameter">
+<Real start="9.81" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.liquid_density" valueReference="5" variability="tunable" causality="parameter">
+<Real start="1.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.I1.p.f" valueReference="17" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.I1.i" valueReference="6" variability="tunable" causality="parameter">
+<Real start="1.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.effort" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.p1.p" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.p2.p" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.p3.p" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.p1.phi" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.p2.phi" valueReference="29" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p1.p3.phi" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.effort" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.p1.p" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.p2.p" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.p3.p" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.p1.phi" valueReference="17" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.p2.phi" valueReference="19" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p12.p3.phi" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.effort" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.p1.p" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.p2.p" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.p3.p" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.p1.phi" valueReference="30" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.p2.phi" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.p2.p3.phi" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.flow" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.p1.p" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.p2.p" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.p3.p" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.p1.phi" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.p2.phi" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.phi.p3.phi" valueReference="18" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.R1.p.e" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.R1.p.f" valueReference="19" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.R1.r" valueReference="7" variability="tunable" causality="parameter">
+<Real start="10.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.height2" valueReference="16" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.flow_in.p" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.flow_in.phi" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.flow_out.p" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.flow_out.phi" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="LeakageFlow.plot" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="LeakageFlow.lake" valueReference="20" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="MSf1.p.e" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="MSf1.p.f" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="MSf1.flow" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="MSf1.effort" valueReference="13" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="R1.p.e" valueReference="15" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="R1.p.f" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="R1.r" valueReference="8" variability="tunable" causality="parameter">
+<Real start="300.0" />
+</ScalarVariable>
+<ScalarVariable name="Splitter1.input" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Splitter1.output1" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Splitter1.output2" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="WaterFlow.input" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="WaterFlow.plot" valueReference="21" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="WaterFlow.size" valueReference="22" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="control" valueReference="23" variability="continuous" causality="input">
+<Real start="0.0" />
+</ScalarVariable>
+<ScalarVariable name="height" valueReference="24" variability="continuous" causality="output">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.p.f" valueReference="29" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.volume" valueReference="25" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C1.volume_initial" valueReference="9" variability="fixed" causality="parameter">
+<Real start="1.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.p.f" valueReference="30" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.volume" valueReference="26" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.C2.volume_initial" valueReference="10" variability="fixed" causality="parameter">
+<Real start="2.0" />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.I1.p.e" valueReference="31" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.I1.state" valueReference="27" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Hydraulic.I1.state_initial" valueReference="11" variability="fixed" causality="parameter">
+<Real start="0.0" />
+</ScalarVariable>
+<ScalarVariable name="LeakageFlow.input" valueReference="32" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="LeakageFlow.input_int" valueReference="28" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="LeakageFlow.input_int_initial" valueReference="12" variability="fixed" causality="parameter">
+<Real start="0.0" />
+</ScalarVariable>
+</ModelVariables>
+<ModelStructure>
+<Outputs>
+<Unknown index="72" />
+</Outputs>
+</ModelStructure>
+</fmiModelDescription>

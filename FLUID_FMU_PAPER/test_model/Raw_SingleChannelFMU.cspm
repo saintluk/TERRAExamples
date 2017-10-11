@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp:CSPDiagram file-version="3" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cpc="http:///nl/utwente/ce/terra/cpc/model/cpc.ecore" xmlns:cpp="http:///nl/utwente/ce/terra/cpp/model/cpp.ecore" xmlns:csp="http:///nl/utwente/ce/terra/csp/model/csp.ecore">
+  <objects xsi:type="csp:CSPModel" name="FMU_A" constraints="201,210,116,76" compositionalRelations="//@compositionalRelations.0">
+    <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="//@links.0" name="pt_A_out" constraints="106,20,10,10">
+      <properties xsi:type="cpc:CPCInterfaceObjectProperty" interfacedObject="//@objects.0/@submodel/@objects.0"/>
+    </objects>
+    <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="//@links.1" name="pt_timeSyncOut" constraints="106,56,10,10">
+      <properties xsi:type="cpc:CPCInterfaceObjectProperty" interfacedObject="//@objects.0/@submodel/@objects.6"/>
+    </objects>
+    <submodel xsi:type="csp:CSPDiagram">
+      <objects xsi:type="csp:CSPPort" link="//@objects.0/@submodel/@links.0" name="pt_A_out" constraints="582,205,10,10"/>
+      <objects xsi:type="csp:CSPWriter" name="Writer_A" constraints="456,190,40,40" compositionalRelations="//@objects.0/@submodel/@compositionalRelations.0" guardExpression="MasterTime >= currentTime + step_size" link="//@objects.0/@submodel/@links.0" variable="//@objects.0/@submodel/@properties.0/@variables.0"/>
+      <objects xsi:type="csp:CSPModel" name="FMI_FMU_A" constraints="236,243,50,50" compositionalRelations="//@objects.0/@submodel/@compositionalRelations.1" guardExpression="true">
+        <submodel xsi:type="csp:CSPDiagram"/>
+        <configuration xsi:type="cpp:CPPCodeBlockConfiguration"/>
+      </objects>
+      <objects xsi:type="csp:CSPModel" name="restricted_condition" constraints="426,296,101,50" compositionalRelations="//@objects.0/@submodel/@compositionalRelations.0" guardExpression="MasterTime &lt; currentTime + step_size">
+        <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="//@objects.0/@submodel/@links.1" name="pt_timeSync" constraints="91,23,10,10">
+          <properties xsi:type="cpc:CPCInterfaceObjectProperty" interfacedObject="//@objects.0/@submodel/@objects.3/@submodel/@objects.0"/>
+        </objects>
+        <submodel xsi:type="csp:CSPDiagram">
+          <objects xsi:type="csp:CSPPort" link="//@objects.0/@submodel/@objects.3/@submodel/@links.0" name="pt_timeSync" constraints="631,147,10,10"/>
+          <objects xsi:type="csp:CSPModel" name="MasterTimeSync" constraints="351,127,105,50" compositionalRelations="//@objects.0/@submodel/@objects.3/@submodel/@compositionalRelations.0">
+            <submodel xsi:type="csp:CSPDiagram"/>
+            <configuration xsi:type="cpp:CPPCodeBlockConfiguration"/>
+          </objects>
+          <objects xsi:type="csp:CSPWriter" name="wr_MasterTimeSync" constraints="535,132,40,40" compositionalRelations="//@objects.0/@submodel/@objects.3/@submodel/@compositionalRelations.0" link="//@objects.0/@submodel/@objects.3/@submodel/@links.0" variable="//@objects.0/@submodel/@objects.3/@submodel/@properties.0/@variables.0"/>
+          <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL" constraints="326,102,274,100" relations="//@objects.0/@submodel/@objects.3/@submodel/@compositionalRelations.0"/>
+          <properties xsi:type="csp:CSPVariablesProperty">
+            <variables name="var_MasterTime" type="//@properties.0/@units.0"/>
+          </properties>
+          <links xsi:type="csp:CSPChannel" ports="//@objects.0/@submodel/@objects.3/@submodel/@objects.2 //@objects.0/@submodel/@objects.3/@submodel/@objects.0"/>
+          <compositionalRelations compositeObjects="//@objects.0/@submodel/@objects.3/@submodel/@objects.1 //@objects.0/@submodel/@objects.3/@submodel/@objects.2" type="SEQUENTIAL" compositionalGroup="//@objects.0/@submodel/@objects.3/@submodel/@objects.3"/>
+        </submodel>
+      </objects>
+      <objects xsi:type="csp:CSPCompositionalGroup" name="ALTERNATIVE" constraints="401,165,151,206" compositionalRelations="//@objects.0/@submodel/@compositionalRelations.1" relations="//@objects.0/@submodel/@compositionalRelations.0"/>
+      <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL" constraints="211,140,366,256" relations="//@objects.0/@submodel/@compositionalRelations.1"/>
+      <objects xsi:type="csp:CSPPort" link="//@objects.0/@submodel/@links.1" name="pt_timeSyncOut" constraints="609,319,10,10"/>
+      <properties xsi:type="csp:CSPVariablesProperty">
+        <variables name="var_output" type="//@properties.0/@units.0"/>
+      </properties>
+      <links xsi:type="csp:CSPChannel" ports="//@objects.0/@submodel/@objects.1 //@objects.0/@submodel/@objects.0"/>
+      <links xsi:type="csp:CSPChannel" ports="//@objects.0/@submodel/@objects.3/pt_timeSync //@objects.0/@submodel/@objects.6"/>
+      <compositionalRelations compositeObjects="//@objects.0/@submodel/@objects.1 //@objects.0/@submodel/@objects.3" type="ALTERNATIVE" compositionalGroup="//@objects.0/@submodel/@objects.4"/>
+      <compositionalRelations compositeObjects="//@objects.0/@submodel/@objects.2 //@objects.0/@submodel/@objects.4" type="SEQUENTIAL" compositionalGroup="//@objects.0/@submodel/@objects.5"/>
+    </submodel>
+  </objects>
+  <objects xsi:type="csp:CSPModel" name="FMU_B" constraints="439,211,128,75" compositionalRelations="//@compositionalRelations.0">
+    <objects xsi:type="csp:CSPPort" link="//@links.0" name="pt_B_in" constraints="0,19,10,10">
+      <properties xsi:type="cpc:CPCInterfaceObjectProperty" interfacedObject="//@objects.1/@submodel/@objects.0"/>
+    </objects>
+    <objects xsi:type="csp:CSPPort" link="//@links.1" name="pt_timeSyncIn" constraints="0,54,10,10">
+      <properties xsi:type="cpc:CPCInterfaceObjectProperty" interfacedObject="//@objects.1/@submodel/@objects.4"/>
+    </objects>
+    <submodel xsi:type="csp:CSPDiagram">
+      <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="//@objects.1/@submodel/@links.0" name="pt_B_in" constraints="186,180,10,10"/>
+      <objects xsi:type="csp:CSPReader" name="Reader_B" constraints="330,161,40,40" compositionalRelations="//@objects.1/@submodel/@compositionalRelations.0" link="//@objects.1/@submodel/@links.0" variable="//@objects.1/@submodel/@properties.0/@variables.0"/>
+      <objects xsi:type="csp:CSPModel" name="FMI_FMU_B" constraints="485,210,50,50" compositionalRelations="//@objects.1/@submodel/@compositionalRelations.1">
+        <submodel xsi:type="csp:CSPDiagram"/>
+        <configuration xsi:type="cpp:CPPCodeBlockConfiguration"/>
+      </objects>
+      <objects xsi:type="csp:CSPReader" name="rd_time" constraints="332,278,40,40" compositionalRelations="//@objects.1/@submodel/@compositionalRelations.0" link="//@objects.1/@submodel/@links.1" variable="//@objects.1/@submodel/@properties.0/@variables.2"/>
+      <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="//@objects.1/@submodel/@links.1" name="pt_timeSyncIn" constraints="181,291,10,10"/>
+      <objects xsi:type="csp:CSPCompositionalGroup" name="ALTERNATIVE" constraints="304,136,98,212" compositionalRelations="//@objects.1/@submodel/@compositionalRelations.1" relations="//@objects.1/@submodel/@compositionalRelations.0"/>
+      <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL" constraints="279,111,281,262" relations="//@objects.1/@submodel/@compositionalRelations.1"/>
+      <properties xsi:type="csp:CSPVariablesProperty">
+        <variables name="var_input" type="//@properties.0/@units.0"/>
+        <variables name="var_output" type="//@properties.0/@units.0"/>
+        <variables name="varTime" type="//@properties.0/@units.0"/>
+      </properties>
+      <links xsi:type="csp:CSPChannel" ports="//@objects.1/@submodel/@objects.0 //@objects.1/@submodel/@objects.1"/>
+      <links xsi:type="csp:CSPChannel" ports="//@objects.1/@submodel/@objects.4 //@objects.1/@submodel/@objects.3"/>
+      <compositionalRelations compositeObjects="//@objects.1/@submodel/@objects.1 //@objects.1/@submodel/@objects.3" type="ALTERNATIVE" compositionalGroup="//@objects.1/@submodel/@objects.5"/>
+      <compositionalRelations compositeObjects="//@objects.1/@submodel/@objects.5 //@objects.1/@submodel/@objects.2" type="SEQUENTIAL" compositionalGroup="//@objects.1/@submodel/@objects.6"/>
+    </submodel>
+  </objects>
+  <objects xsi:type="csp:CSPCompositionalGroup" name="PARALLEL" constraints="176,185,416,126" relations="//@compositionalRelations.0">
+    <properties xsi:type="csp:CSPRecursionProperty"/>
+  </objects>
+  <properties xsi:type="cpc:CPCUnitsProperty">
+    <units name="data" type="real" unit=""/>
+  </properties>
+  <links xsi:type="csp:CSPChannel" ports="//@objects.0/pt_A_out //@objects.1/pt_B_in"/>
+  <links xsi:type="csp:CSPChannel" ports="//@objects.0/pt_timeSyncOut //@objects.1/pt_timeSyncIn"/>
+  <compositionalRelations compositeObjects="//@objects.0 //@objects.1" compositionalGroup="//@objects.2">
+    <bendpoints>378,208</bendpoints>
+  </compositionalRelations>
+</csp:CSPDiagram>

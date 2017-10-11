@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI file-version="3" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cpc="http:///nl/utwente/ce/terra/cpc/model/cpc.ecore" xmlns:csp="http:///nl/utwente/ce/terra/csp/model/csp.ecore" xmlns:fmi="http:///nl/utwente/ce/terra/fmi/model/fmi.ecore">
+  <csp:CSPDiagram>
+    <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="/0/@links.0" name="control" constraints="257,150,10,10"/>
+    <objects xsi:type="csp:CSPReader" name="r_control" constraints="413,135,40,40" compositionalRelations="/0/@compositionalRelations.0" link="/0/@links.0" variable="/0/@properties.2/@variables.0"/>
+    <objects xsi:type="csp:CSPPort" link="/0/@links.1" name="height" constraints="258,236,10,10"/>
+    <objects xsi:type="csp:CSPWriter" name="w_height" constraints="413,215,40,40" compositionalRelations="/0/@compositionalRelations.0" link="/0/@links.1" variable="/0/@properties.2/@variables.1"/>
+    <objects xsi:type="csp:CSPCompositionalGroup" name="IO" constraints="393,115,80,160" compositionalRelations="/0/@compositionalRelations.1" relations="/0/@compositionalRelations.0"/>
+    <objects xsi:type="csp:CSPModel" name="FMI_plant" constraints="558,170,70,50" compositionalRelations="/0/@compositionalRelations.1">
+      <submodel xsi:type="csp:CSPDiagram">
+        <properties xsi:type="csp:CSPVariablesProperty">
+          <variables name="control" linkedParent="/0/@properties.2/@variables.0"/>
+          <variables name="height" linkedParent="/0/@properties.2/@variables.1"/>
+        </properties>
+      </submodel>
+      <configuration xsi:type="fmi:FMIModel" callbackFunctions="/1">
+        <headerFiles>fmi2Functions.h</headerFiles>
+        <headerFiles>logger.h</headerFiles>
+        <sourceFiles>src/logger.cpp</sourceFiles>
+        <portMapping name="control" dataType="REAL" reference="23"/>
+        <portMapping name="height" direction="OUTPUT" dataType="REAL" reference="24"/>
+        <parameterRealMapping name="Hydraulic_C1_area" value="1.0"/>
+        <parameterRealMapping name="Hydraulic_C1_gravity" reference="1" value="9.81"/>
+        <parameterRealMapping name="Hydraulic_C1_liquid_density" reference="2" value="1.0"/>
+        <parameterRealMapping name="Hydraulic_C2_area" reference="3" value="1.0"/>
+        <parameterRealMapping name="Hydraulic_C2_gravity" reference="4" value="9.81"/>
+        <parameterRealMapping name="Hydraulic_C2_liquid_density" reference="5" value="1.0"/>
+        <parameterRealMapping name="Hydraulic_I1_i" reference="6" value="1.0"/>
+        <parameterRealMapping name="Hydraulic_R1_r" reference="7" value="10.0"/>
+        <parameterRealMapping name="R1_r" reference="8" value="300.0"/>
+        <parameterRealMapping name="Hydraulic_C1_volume_initial" reference="9" initial="true" value="1.0"/>
+        <parameterRealMapping name="Hydraulic_C2_volume_initial" reference="10" initial="true" value="2.0"/>
+        <parameterRealMapping name="Hydraulic_I1_state_initial" reference="11" initial="true"/>
+        <parameterRealMapping name="LeakageFlow_input_int_initial" reference="12" initial="true"/>
+        <modelDescription modelName="plant" guid="{cd2add09-a420-4273-ada0-27cd3a18ec88}" generationTool="20-sim"/>
+        <simulationProperties stopTime="20.0" stepSize="0.001"/>
+        <FMUProperties modelIdentifier="plant" canHandleVariableCommunicationStepSize="true" canNotUseMemoryManagementFunctions="true"/>
+      </configuration>
+    </objects>
+    <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL" constraints="368,90,285,210" relations="/0/@compositionalRelations.1"/>
+    <properties xsi:type="cpc:CPCSharedDiagramProperty" componentName="plant"/>
+    <properties xsi:type="cpc:CPCUnitsProperty">
+      <units name="IO_Real" type="real" unit="fmi_Real"/>
+      <units name="IO_boolean" type="boolean" unit="fmi_boolean"/>
+      <units name="IO_integer" type="integer" unit="fmi_integer"/>
+    </properties>
+    <properties xsi:type="csp:CSPVariablesProperty">
+      <variables name="v_control" type="/0/@properties.1/@units.0"/>
+      <variables name="v_height" type="/0/@properties.1/@units.0"/>
+    </properties>
+    <links xsi:type="csp:CSPChannel" ports="/0/@objects.0 /0/@objects.1"/>
+    <links xsi:type="csp:CSPChannel" ports="/0/@objects.2 /0/@objects.3"/>
+    <compositionalRelations compositeObjects="/0/@objects.1 /0/@objects.3" compositionalGroup="/0/@objects.4"/>
+    <compositionalRelations compositeObjects="/0/@objects.5 /0/@objects.4" type="SEQUENTIAL" compositionalGroup="/0/@objects.6"/>
+  </csp:CSPDiagram>
+  <fmi:FMICallbackFunctions/>
+</xmi:XMI>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fmiModelDescription fmiVersion="2.0" modelName="LevelController" guid="{d6f9df54-1689-46cc-b366-77379034dd53}" generationTool="20-sim" numberOfEventIndicators="0" copyright="Controllab Products B.V." license="-">
+<CoSimulation modelIdentifier="LevelController" needsExecutionTool="false" canHandleVariableCommunicationStepSize="true" canInterpolateInputs="false" maxOutputDerivativeOrder="0" canRunAsynchronuously="false" canBeInstantiatedOnlyOncePerProcess="false" canNotUseMemoryManagementFunctions="true" canGetAndSetFMUstate="false" canSerializeFMUstate="false" providesDirectionalDerivative="false">
+<SourceFiles>
+<File name="EulerAngles.c" />
+<File name="fmi2Functions.c" />
+<File name="MotionProfiles.c" />
+<File name="xxfuncs.c" />
+<File name="xxinteg.c" />
+<File name="xxinverse.c" />
+<File name="xxmatrix.c" />
+<File name="xxmodel.c" />
+<File name="xxsubmod.c" />
+<File name="xxTable2D.c" />
+</SourceFiles>
+</CoSimulation>
+<DefaultExperiment startTime="0.0" stopTime="20.0" stepSize="0.001" />
+<ModelVariables>
+<ScalarVariable name="Constant2.output" valueReference="6" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Constant2.C" valueReference="0" description="output value" variability="tunable" causality="parameter">
+<Real start="1.5" />
+</ScalarVariable>
+<ScalarVariable name="Kp1.input" valueReference="10" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Kp1.output" valueReference="7" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="Kp1.K" valueReference="1" description="gain" variability="tunable" causality="parameter">
+<Real start="10.0" />
+</ScalarVariable>
+<ScalarVariable name="limit1.input" valueReference="7" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="limit1.output" valueReference="8" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="limit1.maximum" valueReference="2" variability="tunable" causality="parameter">
+<Real start="0.5" />
+</ScalarVariable>
+<ScalarVariable name="limit1.minimum" valueReference="3" variability="tunable" causality="parameter">
+<Real start="0.0" />
+</ScalarVariable>
+<ScalarVariable name="PlusMinus1.output" valueReference="9" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="PlusMinus1.plus1" valueReference="6" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="PlusMinus1.plus2" valueReference="12" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="PlusMinus3.output" valueReference="10" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="PlusMinus3.plus1" valueReference="9" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="PlusMinus3.minus1" valueReference="11" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="reference1.output" valueReference="12" variability="continuous" causality="local">
+<Real />
+</ScalarVariable>
+<ScalarVariable name="reference1.amplitude" valueReference="4" variability="tunable" causality="parameter">
+<Real start="0.0" />
+</ScalarVariable>
+<ScalarVariable name="reference1.start_time" valueReference="5" variability="tunable" causality="parameter">
+<Real start="1.5" />
+</ScalarVariable>
+<ScalarVariable name="in" valueReference="14" variability="continuous" causality="input">
+<Real start="0.0" />
+</ScalarVariable>
+<ScalarVariable name="out" valueReference="15" variability="continuous" causality="output">
+<Real />
+</ScalarVariable>
+</ModelVariables>
+<ModelStructure>
+<Outputs>
+<Unknown index="20" />
+</Outputs>
+</ModelStructure>
+</fmiModelDescription>

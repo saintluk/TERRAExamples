@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI file-version="3" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cpc="http:///nl/utwente/ce/terra/cpc/model/cpc.ecore" xmlns:cpp="http:///nl/utwente/ce/terra/cpp/model/cpp.ecore" xmlns:csp="http:///nl/utwente/ce/terra/csp/model/csp.ecore" xmlns:fmi="http:///nl/utwente/ce/terra/fmi/model/fmi.ecore">
+  <csp:CSPDiagram>
+    <objects xsi:type="csp:CSPPort" direction="OUTGOING" link="/0/@links.0" name="in" constraints="63,250,10,10"/>
+    <objects xsi:type="csp:CSPReader" name="r_in" constraints="125,237,40,40" compositionalRelations="/0/@compositionalRelations.1" link="/0/@links.0" variable="/0/@properties.2/@variables.0"/>
+    <objects xsi:type="csp:CSPPort" link="/0/@links.1" name="out" constraints="816,246,10,10"/>
+    <objects xsi:type="csp:CSPWriter" name="w_out" constraints="718,236,40,40" compositionalRelations="/0/@compositionalRelations.3" link="/0/@links.1" variable="/0/@properties.2/@variables.1"/>
+    <objects xsi:type="csp:CSPModel" name="FMI_LevelController" constraints="482,217,133,77" compositionalRelations="/0/@compositionalRelations.2 /0/@compositionalRelations.3">
+      <submodel xsi:type="csp:CSPDiagram">
+        <properties xsi:type="csp:CSPVariablesProperty">
+          <variables name="in" linkedParent="/0/@properties.2/@variables.0"/>
+          <variables name="out" linkedParent="/0/@properties.2/@variables.1"/>
+        </properties>
+      </submodel>
+      <configuration xsi:type="fmi:FMIModel" callbackFunctions="/1">
+        <headerFiles>fmi2Functions.h</headerFiles>
+        <headerFiles>logger.h</headerFiles>
+        <sourceFiles>src/logger.cpp</sourceFiles>
+        <portMapping name="in" dataType="REAL" reference="14"/>
+        <portMapping name="out" direction="OUTPUT" dataType="REAL" reference="15"/>
+        <parameterRealMapping name="Constant2_C" value="1.5"/>
+        <parameterRealMapping name="Kp1_K" reference="1" value="10.0"/>
+        <parameterRealMapping name="limit1_maximum" reference="2" value="0.5"/>
+        <parameterRealMapping name="limit1_minimum" reference="3"/>
+        <parameterRealMapping name="reference1_amplitude" reference="4"/>
+        <parameterRealMapping name="reference1_start_time" reference="5" value="1.5"/>
+        <modelDescription modelName="LevelController" guid="{d6f9df54-1689-46cc-b366-77379034dd53}" generationTool="20-sim"/>
+        <simulationProperties stopTime="20.0" stepSize="0.001"/>
+        <FMUProperties modelIdentifier="LevelController" canHandleVariableCommunicationStepSize="true" canNotUseMemoryManagementFunctions="true"/>
+      </configuration>
+    </objects>
+    <objects xsi:type="csp:CSPModel" name="EventA" constraints="256,162,105,50" compositionalRelations="/0/@compositionalRelations.0" guardExpression="v_in > 1.0">
+      <submodel xsi:type="csp:CSPDiagram"/>
+      <configuration xsi:type="cpp:CPPCodeBlockConfiguration"/>
+    </objects>
+    <objects xsi:type="csp:CSPModel" name="EventB" constraints="257,299,105,50" compositionalRelations="/0/@compositionalRelations.0" guardExpression="v_in &lt; 1.0">
+      <submodel xsi:type="csp:CSPDiagram"/>
+      <configuration xsi:type="cpp:CPPCodeBlockConfiguration"/>
+    </objects>
+    <objects xsi:type="csp:CSPCompositionalGroup" name="ALTERNATIVE" constraints="231,137,156,237" compositionalRelations="/0/@compositionalRelations.1 /0/@compositionalRelations.2" relations="/0/@compositionalRelations.0"/>
+    <objects xsi:type="csp:CSPCompositionalGroup" name="SEQUENTIAL" constraints="100,112,683,287" relations="/0/@compositionalRelations.1 /0/@compositionalRelations.2 /0/@compositionalRelations.3"/>
+    <properties xsi:type="cpc:CPCSharedDiagramProperty" componentName="LevelController"/>
+    <properties xsi:type="cpc:CPCUnitsProperty">
+      <units name="IO_Real" type="real" unit="fmi_Real"/>
+      <units name="IO_boolean" type="boolean" unit="fmi_boolean"/>
+      <units name="IO_integer" type="integer" unit="fmi_integer"/>
+    </properties>
+    <properties xsi:type="csp:CSPVariablesProperty">
+      <variables name="v_in" type="/0/@properties.1/@units.0"/>
+      <variables name="v_out" type="/0/@properties.1/@units.0"/>
+    </properties>
+    <links xsi:type="csp:CSPChannel" ports="/0/@objects.0 /0/@objects.1"/>
+    <links xsi:type="csp:CSPChannel" ports="/0/@objects.2 /0/@objects.3"/>
+    <compositionalRelations compositeObjects="/0/@objects.5 /0/@objects.6" type="ALTERNATIVE" compositionalGroup="/0/@objects.7"/>
+    <compositionalRelations compositeObjects="/0/@objects.1 /0/@objects.7" type="SEQUENTIAL" compositionalGroup="/0/@objects.8"/>
+    <compositionalRelations compositeObjects="/0/@objects.7 /0/@objects.4" type="SEQUENTIAL" compositionalGroup="/0/@objects.8"/>
+    <compositionalRelations compositeObjects="/0/@objects.4 /0/@objects.3" type="SEQUENTIAL" compositionalGroup="/0/@objects.8"/>
+  </csp:CSPDiagram>
+  <fmi:FMICallbackFunctions/>
+</xmi:XMI>
